@@ -1,0 +1,13 @@
+# Node Modules Directory:
+node_modules/
+
+# Configure Files:
+.env.development
+.env.production
+.env.test
+
+# Build Directory
+dist/
+
+# Mac OS 
+.DS_STORE
