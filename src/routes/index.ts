@@ -5,6 +5,7 @@ import {
 } from "express";
 import getHome from "./homes";
 import configure from "../utils/configure";
+import register from "./auth/register";
 
 const router = Router();
 
@@ -28,5 +29,7 @@ router.get("/", (_req: Request, res: Response): void => {
  * The getHome function handles this route and returns a welcome message.
  */
 router.get(baseURL, getHome);
+
+router.post(baseURL + "/auth/register", register);
 
 export default router;

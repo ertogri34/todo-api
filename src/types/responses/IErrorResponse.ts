@@ -1,4 +1,4 @@
-import type { Status } from "./Status";
+import type { Status } from "../Status";
 
 /**
  * Interface representing the structure of an error response.

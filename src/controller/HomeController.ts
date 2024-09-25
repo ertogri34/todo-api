@@ -1,4 +1,4 @@
-import { IMessageResponse } from "../types/IMessageResponse";
+import type { IMessageResponse } from "../types/responses/IMessageResponse";
 
 /**
  * HomeController class to handle the home route logic

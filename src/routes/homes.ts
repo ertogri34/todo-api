@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import HomeController from "../controller/HomeController";
-import { IMessageResponse } from "../types/IMessageResponse";
+import { IMessageResponse } from "../types/responses/IMessageResponse";
 
 /**
  * Handler function for the /api/v1 endpoint.

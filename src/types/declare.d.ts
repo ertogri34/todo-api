@@ -11,6 +11,8 @@ declare global {
 	 * - PORT: The port on which the server will run
 	 * - ALLOW_LIST: A string of allowed origins for CORS
 	 * - API_VERSION: The version of the API (e.g., "v1")
+	 * - MONGO_CONNECTION_URI: Mongo connection uri
+	 * - MONGO_DATABASE_NAME: mongo database name
 	 */
 	namespace NodeJS {
 		interface ProcessEnv {
@@ -18,6 +20,9 @@ declare global {
 			PORT: string;
 			ALLOW_LIST: string;
 			API_VERSION: string;
+			MONGO_CONNECTION_URI: string;
+			MONGO_DATABASE_NAME: string;
+			SALT_ROUNDS: string;
 		}
 	}
 

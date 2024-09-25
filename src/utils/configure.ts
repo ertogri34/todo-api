@@ -17,6 +17,9 @@ const configure = {
 	PORT: Number(process.env.PORT), // The port number for the server, converted to a number
 	ALLOW_LIST: allowList, // Array of allowed origins for CORS
 	API_VERSION: process.env.API_VERSION, // The API version string
+	MONGO_CONNECTION_URI: process.env.MONGO_CONNECTION_URI,
+	MONGO_DATABASE_NAME: process.env.MONGO_DATABASE_NAME,
+	SALT_ROUNDS: Number(process.env.SALT_ROUNDS),
 };
 
 // Export the configuration object for use throughout the application

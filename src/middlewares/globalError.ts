@@ -4,7 +4,7 @@ import type {
 	Response,
 } from "express";
 import AppError from "../errors/AppError";
-import type { IErrorResponse } from "../types/IErrorResponse";
+import type { IErrorResponse } from "../types/responses/IErrorResponse";
 
 /**
  * Global error handling middleware for handling all errors
