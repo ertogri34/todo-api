@@ -10,12 +10,12 @@ import logger from "./logger"; // Import the logger for error logging
  */
 export function generateAccessToken(
 	payload: IPayload,
-): { accessToken: string; expiresIn: string } | null {
+): { accessToken: string; expiresIn: number } | null {
 	try {
 		// Create a JWT token with the given payload and secret key
 		const token = jwt.sign(payload, configure.SECRET_KEY, {
 			// Set expiration time based on the configured value
-			expiresIn: configure.EXPIRES_IN + "ms",
+			expiresIn: configure.EXPIRES_IN.toString() + "ms",
 		});
 
 		// Return the generated token and its expiration time
@@ -37,7 +37,7 @@ export function generateAccessToken(
  */
 export function generateRefreshToken(payload: IPayload): {
 	refreshToken: string;
-	expiresIn: string;
+	expiresIn: number;
 } | null {
 	try {
 		// Create a refresh token with the given payload and secret key
@@ -47,7 +47,8 @@ export function generateRefreshToken(payload: IPayload): {
 			{
 				// Set expiration time for the refresh token
 				expiresIn:
-					configure.REFRESH_TOKEN_EXPIRES_IN + "ms",
+					configure.REFRESH_TOKEN_EXPIRES_IN.toString() +
+					"ms",
 			},
 		);
 
@@ -105,6 +106,6 @@ export function verifyRefreshToken(
 ): IPayload | null {
 	return verifyToken(
 		token,
-		configure.REFRESH_TOKEN_SECRET_KEY, // Call verifyToken with the refresh token and secret key
+		configure.REFRESH_TOKEN_SECRET_KEY.toString(), // Call verifyToken with the refresh token and secret key
 	);
 }

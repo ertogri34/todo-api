@@ -21,9 +21,10 @@ const configure = {
 	MONGO_DATABASE_NAME: process.env.MONGO_DATABASE_NAME, // Name of the MongoDB database
 	SALT_ROUNDS: Number(process.env.SALT_ROUNDS), // Number of rounds for password hashing
 	SECRET_KEY: process.env.SECRET_KEY, // Secret key for signing tokens
-	EXPIRES_IN: process.env.EXPIRES_IN, // Token expiration time
-	REFRESH_TOKEN_EXPIRES_IN:
-		process.env.REFRESH_TOKEN_EXPIRES_IN, // Refresh token expiration time
+	EXPIRES_IN: Number(process.env.EXPIRES_IN), // Token expiration time
+	REFRESH_TOKEN_EXPIRES_IN: Number(
+		process.env.REFRESH_TOKEN_EXPIRES_IN,
+	), // Refresh token expiration time
 	REFRESH_TOKEN_SECRET_KEY:
 		process.env.REFRESH_TOKEN_SECRET_KEY, // Secret key for refresh token signing
 };

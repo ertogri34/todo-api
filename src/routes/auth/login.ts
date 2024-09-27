@@ -106,8 +106,7 @@ export default async function login(
 		userId: existingUser._id, // User ID to associate with the refresh token
 		refreshToken: refreshTokenResult.refreshToken, // The generated refresh token
 		expiresAt: new Date(
-			Date.now() +
-				Number(configure.REFRESH_TOKEN_EXPIRES_IN), // Expiration time calculated from the configured value
+			Date.now() + configure.REFRESH_TOKEN_EXPIRES_IN, // Expiration time calculated from the configured value
 		),
 		userAgent: req.headers["user-agent"],
 	});
@@ -116,9 +115,10 @@ export default async function login(
 	return res.status(201).json({
 		message: "Login successful",
 		access_token: accessTokenResult.accessToken, // Access token for the user
-		expires_in: accessTokenResult.expiresIn + "ms", // Expiration time of the access token
+		expires_in:
+			accessTokenResult.expiresIn.toString() + "ms", // Expiration time of the access token
 		refresh_token: refreshTokenResult.refreshToken, // Refresh token for the user
 		refresh_token_expires_in:
-			refreshTokenResult.expiresIn + "ms", // Expiration time of the refresh token
+			refreshTokenResult.expiresIn.toString() + "ms", // Expiration time of the refresh token
 	} as ILoginResponse);
 }
