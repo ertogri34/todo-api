@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose"; // Import ObjectId type from Mongoose for MongoDB document identifiers
+import mongoose from "mongoose"; // Import ObjectId type from Mongoose for MongoDB document identifiers
 import { UserRole } from "./documents/IUserDocument"; // Import UserRole enum to represent different user roles
 
 /**
@@ -8,7 +8,7 @@ import { UserRole } from "./documents/IUserDocument"; // Import UserRole enum to
  */
 export interface IPayload {
 	// Unique identifier for the user, represented as a MongoDB ObjectId.
-	id: ObjectId;
+	id: mongoose.Types.ObjectId;
 
 	// The role of the user, indicating their permissions within the application.
 	role: UserRole;

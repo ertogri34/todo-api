@@ -4,6 +4,7 @@ import {
 	UserRole,
 } from "../../types/documents/IUserDocument"; // Import the IUserDocument interface and UserRole enum
 import RefreshTokenController from "../../controller/RefreshTokenController"; // Import the controller for handling refresh token operations
+import TodoController from "../../controller/TodoController";
 
 // Regular expression for validating the email format
 const emailRegex =
@@ -66,6 +67,8 @@ userSchema.pre(
 		await RefreshTokenController.revokeUserRefreshTokenByUserId(
 			user.id,
 		);
+
+		await TodoController.deleteTodosByUserId(user.id);
 
 		next(); // Proceed to the next middleware or operation
 	},

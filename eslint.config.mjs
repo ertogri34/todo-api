@@ -10,14 +10,6 @@ export default tseslint.config(
 	...tseslint.configs.stylisticTypeChecked,
 	eslintConfigPrettier,
 	{
-		languageOptions: {
-			parserOptions: {
-				projectService: true,
-				tsconfigRootDir: import.meta.dirname,
-			},
-		},
-	},
-	{
 		rules: {
 			semi: "error",
 			"require-await": "error",

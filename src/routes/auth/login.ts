@@ -12,7 +12,6 @@ import {
 	generateAccessToken,
 	generateRefreshToken,
 } from "../../utils/jsonwebtoken";
-import type { ObjectId } from "mongoose";
 import ServerFailedError from "../../errors/ServerFailedError";
 import type { IPayload } from "../../types/IPayload";
 import RefreshTokenController from "../../controller/RefreshTokenController";
@@ -63,7 +62,7 @@ export default async function login(
 
 	// Create a payload for token generation
 	const payload: IPayload = {
-		id: existingUser._id as ObjectId,
+		id: existingUser.id,
 		name: existingUser.name,
 		role: existingUser.role,
 	};
