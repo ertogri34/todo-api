@@ -1,5 +1,5 @@
 // Importing the 'Document' interface from Mongoose, which is used for defining Mongoose documents
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 /**
  * Enum to define user roles.
@@ -26,6 +26,7 @@ export interface IUser {
  * It extends the IUser interface and adds Mongoose document properties.
  */
 export interface IUserDocument extends IUser, Document {
+	id: mongoose.Types.ObjectId; // Unique identifier for the user document in MongoDB
 	createdAt: Date; // Timestamp for when the user was created
 	updatedAt: Date; // Timestamp for when the user was last updated
 }

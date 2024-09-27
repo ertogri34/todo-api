@@ -29,7 +29,11 @@ jobs:
           MONGO_DATABASE_NAME: todo-test
           ALLOW_LIST: http://localhost:3000,
           API_VERSION: 1
-          SALT_ROUNDS: 10 # (example value)
+          SALT_ROUNDS: 10 # ( Example Value )
+          SECRET_KEY: asas # ( Example Value )
+          EXPIRES_IN: 300000 # ( Example Value )
+          REFRESH_TOKEN_EXPIRES_IN: 2592000000 # ( Example Value )
+          REFRESH_TOKEN_SECRET_KEY: asdas # ( Example Value )
         run: npm test
 
   build:
