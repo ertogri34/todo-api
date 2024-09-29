@@ -114,10 +114,8 @@ export default async function login(
 	return res.status(201).json({
 		message: "Login successful",
 		access_token: accessTokenResult.accessToken, // Access token for the user
-		expires_in:
-			accessTokenResult.expiresIn.toString() + "ms", // Expiration time of the access token
+		expires_in: accessTokenResult.expiresIn, // Expiration time of the access token
 		refresh_token: refreshTokenResult.refreshToken, // Refresh token for the user
-		refresh_token_expires_in:
-			refreshTokenResult.expiresIn.toString() + "ms", // Expiration time of the refresh token
+		refresh_token_expires_in: refreshTokenResult.expiresIn, // Expiration time of the refresh token
 	} as ILoginResponse);
 }

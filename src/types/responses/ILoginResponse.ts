@@ -14,5 +14,5 @@ export interface ILoginResponse
 	refresh_token: string;
 
 	// The duration (in seconds) until the refresh token expires.
-	refresh_token_expires_in: string;
+	refresh_token_expires_in: number;
 }

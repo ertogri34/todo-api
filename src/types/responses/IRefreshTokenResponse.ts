@@ -10,5 +10,5 @@ export interface IRefreshTokenResponse {
 	/**
 	 * The duration (in milliseconds) for which the access token is valid.
 	 */
-	expires_in: string; // The expiration time is provided as a string, indicating how long the token is valid
+	expires_in: number; // The expiration time is provided as a number, indicating how long the token is valid
 }

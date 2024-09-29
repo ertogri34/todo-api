@@ -16,6 +16,7 @@ import {
 	getTodos,
 	updateTodo,
 } from "./todos"; // Import the functions for handling Todo operations
+import { deleteUser, getUser, updateUser } from "./users"; // Import user management functions
 
 const router = Router(); // Create a new Express Router instance
 
@@ -23,7 +24,9 @@ const router = Router(); // Create a new Express Router instance
  * Construct the base API URL using the configured API version.
  */
 const baseURL = `/api/v${configure.API_VERSION}`; // Define the base URL for the API routes
-const todoURL = baseURL + "/todos";
+const authURL = `${baseURL}/auth`; // Define the URL for authentication operations
+const todoURL = `${baseURL}/todos`; // Define the URL for Todo operations
+const userURL = `${baseURL}/users/me`; // Define the URL for user management operations
 
 /**
  * Redirect root URL ("/") requests to the API base URL.
@@ -41,32 +44,29 @@ router.get("/", (_req: Request, res: Response): void => {
  */
 router.get(baseURL, getHome); // Handle GET requests to the base API URL
 
-// Set up the route for user registration
-router.post(baseURL + "/auth/register", register);
-
-// Set up the route for user login
-router.post(baseURL + "/auth/login", login);
-
-// Set up the route for refreshing the access token
+// Set up user authentication routes
+router.post(`${authURL}/register`, register); // User registration route
+router.post(`${authURL}/login`, login); // User login route
 router.post(
-	baseURL + "/auth/refresh-token",
+	`${authURL}/refresh-token`,
 	authentication, // Use authentication middleware to verify the user's token
 	refreshToken, // Handle the refresh token logic
 );
 
-// Set up the route to get all Todos
-router.get(todoURL, authentication, getTodos);
+// Set up Todo routes with authentication
+router.get(todoURL, authentication, getTodos); // Get all Todos
+router.post(todoURL, authentication, createTodo); // Create a new Todo
+router.get(`${todoURL}/:id`, authentication, getTodo); // Get a Todo by ID
+router.put(`${todoURL}/:id`, authentication, updateTodo); // Update a Todo by ID
+router.delete(`${todoURL}/:id`, authentication, deleteTodo); // Delete a Todo by ID
 
-// Set up the route to create a new Todo
-router.post(todoURL, authentication, createTodo);
-
-// Set up the route to get a Todo by ID
-router.get(todoURL + "/:id", authentication, getTodo);
-
-// Set up the route to update a Todo by ID
-router.put(todoURL + "/:id", authentication, updateTodo);
-
-// Set up the route to delete a Todo by ID
-router.delete(todoURL + "/:id", authentication, deleteTodo);
+// Set up user management routes with authentication
+router.get(userURL, authentication, getUser); // Get current user's info
+router.delete(
+	`${userURL}/delete`,
+	authentication,
+	deleteUser,
+); // Delete current user
+router.put(`${userURL}/update`, authentication, updateUser); // Update current user's info
 
 export default router; // Export the configured router for use in the main application

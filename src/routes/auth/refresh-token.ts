@@ -71,7 +71,6 @@ export default async function refreshToken(
 	// Sending a successful response with the new access token and its expiration time
 	return res.status(201).json({
 		access_token: accessTokenResult.accessToken, // New access token
-		expires_in:
-			accessTokenResult.expiresIn.toString() + "ms", // Expiration time of the new access token
+		expires_in: accessTokenResult.expiresIn, // Expiration time of the new access token
 	} as IRefreshTokenResponse); // Casting the response to the appropriate interface type
 }

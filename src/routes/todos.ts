@@ -5,10 +5,10 @@ import type {
 } from "express"; // Import necessary types from Express
 import TodoController from "../controller/TodoController"; // Import the Todo controller for handling business logic
 
-import { ITodoBody } from "../types/bodies/ITodoBody"; // Import the type for the request body of creating a Todo
+import { ICreateTodoBody } from "../types/bodies/ICreateTodoBody"; // Import the type for the request body of creating a Todo
 import BadRequestError from "../errors/BadRequestError"; // Import custom error for bad requests
 import ServerFailedError from "../errors/ServerFailedError"; // Import custom error for server failures
-import { IGetTodoParams } from "../types/params/IGetTodoParams"; // Import the type for parameters when getting a Todo
+import { IIdentifiable } from "../types/params/IDWithParams"; // Import the type for parameters when getting a Todo
 import { IGetTodosResponse } from "../types/responses/IGetTodosResponse"; // Import the type for the response of getting Todos
 import { IGetTodoResponse } from "../types/responses/IGetTodoResponse"; // Import the type for the response of getting a single Todo
 import { ICreateTodoResponse } from "../types/responses/ICraeteTodoResponse"; // Import the type for the response of creating a Todo
@@ -45,7 +45,7 @@ export async function getTodos(
  * @returns A response containing the Todo or an error
  */
 export async function getTodo(
-	req: Request<IGetTodoParams>,
+	req: Request<IIdentifiable>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response<IGetTodoResponse> | void> {
@@ -70,7 +70,7 @@ export async function getTodo(
  * @returns A response confirming the creation of the Todo or an error
  */
 export async function createTodo(
-	req: Request<object, object, ITodoBody>,
+	req: Request<object, object, ICreateTodoBody>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response<ICreateTodoResponse> | void> {
@@ -117,7 +117,7 @@ export async function createTodo(
  * @returns A response indicating success or an error
  */
 export async function updateTodo(
-	req: Request<IGetTodoParams, object, IUpdateTodoBody>,
+	req: Request<IIdentifiable, object, IUpdateTodoBody>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response | void> {
@@ -156,7 +156,7 @@ export async function updateTodo(
  * @returns A response indicating success or an error
  */
 export async function deleteTodo(
-	req: Request<IGetTodoParams>,
+	req: Request<IIdentifiable>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response | void> {

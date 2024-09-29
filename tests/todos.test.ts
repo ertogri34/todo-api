@@ -6,7 +6,7 @@ import {
 	IUser,
 	UserRole,
 } from "../src/types/documents/IUserDocument";
-import { ITodoBody } from "../src/types/bodies/ITodoBody";
+import { ICreateTodoBody } from "../src/types/bodies/ICreateTodoBody";
 
 const testUser: IUser = {
 	email: "test@gmail.com",
@@ -51,7 +51,7 @@ describe("Todo Routes", () => {
 	});
 
 	test("POST /api/v1/todos - Create a new Todo", async () => {
-		const newTodo: ITodoBody = {
+		const newTodo: ICreateTodoBody = {
 			title: "Test Todo",
 			description: "This is a test Todo",
 		};
