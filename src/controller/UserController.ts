@@ -44,7 +44,9 @@ class UserController {
 		email: string,
 	): Promise<IUserDocument | null> {
 		try {
-			const user = await UserModel.findOne({ email }); // Query the user by email
+			const user = await UserModel.findOne<IUserDocument>({
+				email,
+			}); // Query the user by email
 			return user; // Return the found user or null
 		} catch (err) {
 			logger.error(err); // Log any errors
@@ -149,6 +151,20 @@ class UserController {
 		} catch (err) {
 			logger.error(err); // Log any errors
 			throw err; // Rethrow the error for higher-level handling
+		}
+	}
+
+	public async findUsers(
+		limit?: number,
+	): Promise<IUserDocument[]> {
+		try {
+			const users =
+				await UserModel.find<IUserDocument>().exec();
+			if (limit && limit > 0) return users.slice(0, limit);
+			return users;
+		} catch (err) {
+			logger.error(err);
+			throw err;
 		}
 	}
 }

@@ -8,13 +8,14 @@ import TodoController from "../controller/TodoController"; // Import the Todo co
 import { ICreateTodoBody } from "../types/bodies/ICreateTodoBody"; // Import the type for the request body of creating a Todo
 import BadRequestError from "../errors/BadRequestError"; // Import custom error for bad requests
 import ServerFailedError from "../errors/ServerFailedError"; // Import custom error for server failures
-import { IIdentifiable } from "../types/params/IDWithParams"; // Import the type for parameters when getting a Todo
+import { IIdentifiable } from "../types/params/IIdentifiable"; // Import the type for parameters when getting a Todo
 import { IGetTodosResponse } from "../types/responses/IGetTodosResponse"; // Import the type for the response of getting Todos
 import { IGetTodoResponse } from "../types/responses/IGetTodoResponse"; // Import the type for the response of getting a single Todo
 import { ICreateTodoResponse } from "../types/responses/ICraeteTodoResponse"; // Import the type for the response of creating a Todo
 import NotFoundError from "../errors/NotFoundError"; // Import custom error for not found resources
 import { IUpdateTodoBody } from "../types/bodies/IUpdateTodoBody"; // Import the type for the request body of updating a Todo
 import logger from "../utils/logger"; // Import the logger utility for logging errors
+import { IQueryParams } from "../types/params/QueryParams";
 
 /**
  * Retrieve all Todos for the authenticated user.
@@ -24,15 +25,19 @@ import logger from "../utils/logger"; // Import the logger utility for logging e
  * @returns A response containing the list of Todos
  */
 export async function getTodos(
-	req: Request,
+	req: Request<object, IQueryParams>,
 	res: Response,
 ): Promise<Response<IGetTodosResponse>> {
+	const limit = Number(
+		req.query.limit !== undefined ? req.query.limit : 10,
+	);
+
 	const todos = await TodoController.getTodosByUserId(
 		req.user.id, // Get Todos by the authenticated user's ID
 	);
 
 	return res.status(200).json({
-		todos, // Return the list of Todos
+		todos: todos?.slice(0, limit), // Return the list of Todos
 	});
 }
 
