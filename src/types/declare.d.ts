@@ -28,6 +28,9 @@ declare global {
 			EXPIRES_IN: string; // Expiration time for access tokens
 			REFRESH_TOKEN_EXPIRES_IN: string; // Expiration time for refresh tokens
 			REFRESH_TOKEN_SECRET_KEY: string; // Secret key for signing refresh tokens
+			ADMIN_USER_NAME: string;
+			ADMIN_USER_EMAIL: string;
+			ADMIN_USER_PASSWORD: string;
 		}
 	}
 

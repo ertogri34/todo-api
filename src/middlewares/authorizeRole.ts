@@ -17,7 +17,7 @@ export default function authorizeRole(role: UserRole) {
 		req: Request, // Express request object containing user data
 		_res: Response, // Express response object, not used in this function
 		next: NextFunction, // Next middleware function to call
-	) => {
+	): void => {
 		const payload = req.user; // Extract the user payload from the request
 
 		// Check if the user's role is lower than the required role

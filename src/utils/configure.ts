@@ -27,6 +27,9 @@ const configure = {
 	), // Refresh token expiration time
 	REFRESH_TOKEN_SECRET_KEY:
 		process.env.REFRESH_TOKEN_SECRET_KEY, // Secret key for refresh token signing
+	ADMIN_USER_NAME: process.env.ADMIN_USER_NAME,
+	ADMIN_USER_EMAIL: process.env.ADMIN_USER_EMAIL,
+	ADMIN_USER_PASSWORD: process.env.ADMIN_USER_PASSWORD,
 };
 
 // Export the configuration object for use throughout the application

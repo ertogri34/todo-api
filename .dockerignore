@@ -1,0 +1,26 @@
+# Configure Files
+.env.production
+.env.test
+.env.development
+
+# Node Modules Directory
+node_modules/
+
+# .Vscode Directory
+.vscode/
+
+# Build
+dist/
+
+# Docs
+docs/
+README.md
+
+# Tests
+tests/
+
+# Dev
+nodemon.json
+
+# Mac OS
+.DS_STORE
