@@ -1,4 +1,3 @@
-import AppError from "../errors/AppError"; // Importing the custom AppError class for error handling
 import { IPayload } from "./IPayload"; // Importing the IPayload interface that defines the structure of payload data
 
 /**
@@ -39,10 +38,6 @@ declare global {
 	 * This allows passing an AppError instance through the middleware stack for better error handling.
 	 */
 	namespace Express {
-		interface NextFunction {
-			err: AppError; // Custom error object for error handling in middleware
-		}
-
 		interface Request {
 			user: IPayload; // User data attached to the request object after authentication
 		}
