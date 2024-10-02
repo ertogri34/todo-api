@@ -28,6 +28,11 @@ import {
 import authorizeRole from "../middlewares/authorizeRole"; // Import role-based authorization middleware
 import { UserRole } from "../types/documents/IUserDocument"; // Import user role types
 
+// Import the rate limiters & speed limiters
+import rateLimiter from "../middlewares/rateLimits/rateLimiter";
+import speedLimiter from "../middlewares/rateLimits/speedLimiter";
+import criticalRateLimiter from "../middlewares/rateLimits/criticalRateLimiter";
+
 const router = Router(); // Create a new Express Router instance
 
 /**
@@ -52,34 +57,71 @@ router.get("/", (_req: Request, res: Response): void => {
  * Set up the route for the base API URL ("/api/vX").
  * The getHome function handles this route and returns a welcome message.
  */
-router.get(baseURL, getHome); // Handle GET requests to the base API URL
+router.get(baseURL, speedLimiter, getHome); // Handle GET requests to the base API URL with speed limiter
 
-// Set up user authentication routes
-router.post(`${authURL}/register`, register); // Handle user registration
-router.post(`${authURL}/login`, login); // Handle user login
+// Set up user authentication routes with rate limiting and critical rate limiting
+router.post(`${authURL}/register`, rateLimiter, register); // Handle user registration with rate limiting
+router.post(`${authURL}/login`, criticalRateLimiter, login); // Handle user login with critical rate limiting
 router.post(
 	`${authURL}/refresh-token`,
 	authentication, // Authenticate the user before allowing a token refresh
+	criticalRateLimiter, // Apply critical rate limiting for token refresh
 	refreshToken, // Handle the refresh token functionality
 );
 
-// Set up Todo routes with authentication
-router.get(todoURL, authentication, getTodos); // Retrieve all Todos
-router.post(todoURL, authentication, createTodo); // Create a new Todo
-router.get(`${todoURL}/:id`, authentication, getTodo); // Retrieve a Todo by ID
-router.put(`${todoURL}/:id`, authentication, updateTodo); // Update a Todo by ID
-router.delete(`${todoURL}/:id`, authentication, deleteTodo); // Delete a Todo by ID
+// Set up Todo routes with authentication and rate limiting
+router.get(todoURL, authentication, rateLimiter, getTodos); // Retrieve all Todos with rate limiting
+router.post(
+	todoURL,
+	authentication,
+	rateLimiter,
+	createTodo,
+); // Create a new Todo with rate limiting
+router.get(
+	`${todoURL}/:id`,
+	authentication,
+	rateLimiter,
+	getTodo,
+); // Retrieve a Todo by ID with rate limiting
+router.put(
+	`${todoURL}/:id`,
+	authentication,
+	rateLimiter,
+	updateTodo,
+); // Update a Todo by ID with rate limiting
+router.delete(
+	`${todoURL}/:id`,
+	authentication,
+	rateLimiter,
+	deleteTodo,
+); // Delete a Todo by ID with rate limiting
 
 // Set up user management routes with authentication
-router.get(userURL, authentication, getProfile); // Retrieve current user's profile information
-router.delete(`${userURL}`, authentication, deleteUser); // Delete current user's account
-router.put(`${userURL}`, authentication, updateUser); // Update current user's profile information
+router.get(
+	userURL,
+	authentication,
+	rateLimiter,
+	getProfile,
+); // Retrieve current user's profile information with rate limiting
+router.delete(
+	`${userURL}`,
+	authentication,
+	rateLimiter,
+	deleteUser,
+); // Delete current user's account with rate limiting
+router.put(
+	`${userURL}`,
+	authentication,
+	rateLimiter,
+	updateUser,
+); // Update current user's profile information with rate limiting
 
-// Set up admin routes for user management
+// Set up admin routes for user management with critical rate limiting
 router.get(
 	`${baseURL}/users`,
 	authentication,
 	authorizeRole(UserRole.ADMIN), // Only admins can retrieve a list of users
+	rateLimiter, // Apply rate limiting for user retrieval
 	getUsers,
 ); // Retrieve all users
 
@@ -87,6 +129,7 @@ router.get(
 	`${baseURL}/users/:id`,
 	authentication,
 	authorizeRole(UserRole.ADMIN), // Only admins can retrieve a specific user by ID
+	rateLimiter, // Apply rate limiting for user retrieval
 	getTargetUser,
 ); // Retrieve a specific user by ID
 
@@ -94,6 +137,7 @@ router.delete(
 	`${baseURL}/users/:id`,
 	authentication,
 	authorizeRole(UserRole.ADMIN), // Only admins can delete a specific user by ID
+	rateLimiter, // Apply rate limiting for user deletion
 	getTargetUserDelete,
 ); // Delete a specific user by ID
 
@@ -101,6 +145,7 @@ router.put(
 	`${baseURL}/users/:id`,
 	authentication,
 	authorizeRole(UserRole.ADMIN), // Only admins can update a specific user by ID
+	rateLimiter, // Apply rate limiting for user updates
 	getTargetUserUpdate,
 ); // Update a specific user by ID
 
