@@ -3,7 +3,7 @@ import type {
 	Response,
 	NextFunction,
 } from "express";
-import type { ILoginBody } from "../../types/bodies/ILoginBody";
+import type { ILoginDTO } from "../../types/dtos/ILoginDTO";
 import BadRequestError from "../../errors/BadRequestError";
 import UserController from "../../controller/UserController";
 import NotFoundError from "../../errors/NotFoundError";
@@ -27,7 +27,7 @@ import type { ILoginResponse } from "../../types/responses/ILoginResponse";
  * @returns A response with access and refresh tokens or an error.
  */
 export default async function login(
-	req: Request<object, object, ILoginBody>,
+	req: Request<object, object, ILoginDTO>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response<ILoginResponse> | void> {

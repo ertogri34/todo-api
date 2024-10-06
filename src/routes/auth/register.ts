@@ -4,7 +4,7 @@ import type {
 	Response,
 } from "express";
 import BadRequestError from "../../errors/BadRequestError";
-import { IRegisterBody } from "../../types/bodies/IRegisterBody";
+import { type IRegisterDTO } from "../../types/dtos/IRegisterDTO";
 import UserController from "../../controller/UserController";
 import type { IMessageResponse } from "../../types/responses/IMessageResponse";
 import ServerFailedError from "../../errors/ServerFailedError";
@@ -25,7 +25,7 @@ import { hashPassword } from "../../utils/password";
  * @returns A Promise that resolves to a JSON response if successful or void if an error occurs.
  */
 export default async function register(
-	req: Request<object, object, IRegisterBody>,
+	req: Request<object, object, IRegisterDTO>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response<IMessageResponse> | void> {

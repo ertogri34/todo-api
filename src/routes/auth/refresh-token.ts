@@ -3,7 +3,7 @@ import type {
 	Response,
 	NextFunction,
 } from "express"; // Importing types from express for request, response, and next function handling
-import { IRefreshTokenBody } from "../../types/bodies/IRefreshTokenBody"; // Importing interface for refresh token body
+import { type IRefreshTokenDTO } from "../../types/dtos/IRefreshTokenBody"; // Importing interface for refresh token body
 import BadRequestError from "../../errors/BadRequestError"; // Importing custom error for bad requests
 import RefreshTokenController from "../../controller/RefreshTokenController"; // Importing the controller for managing refresh tokens
 import {
@@ -21,7 +21,7 @@ import { IRefreshTokenResponse } from "../../types/responses/IRefreshTokenRespon
  * @returns A response containing the new access token or an error if any issue occurs.
  */
 export default async function refreshToken(
-	req: Request<object, object, IRefreshTokenBody>, // Defining the request type with a specific body type
+	req: Request<object, object, IRefreshTokenDTO>, // Defining the request type with a specific body type
 	res: Response, // Defining the response type
 	next: NextFunction, // Defining the next function type for middleware chaining
 ): Promise<Response<IRefreshTokenResponse> | void> {

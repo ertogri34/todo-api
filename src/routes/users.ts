@@ -7,7 +7,7 @@ import UserController from "../controller/UserController"; // Import UserControl
 import NotFoundError from "../errors/NotFoundError"; // Import NotFoundError for handling cases where a user is not found
 import type { IGetUserResponse } from "../types/responses/IGetUserResponse"; // Import the response type for getting user information
 import ServerFailedError from "../errors/ServerFailedError"; // Import ServerFailedError for handling server-side failures
-import type { IUpdateUserBody } from "../types/bodies/IUpdateUserBody"; // Import the request body type for updating user information
+import type { IUpdateUserDTO } from "../types/dtos/IUpdateUserBody"; // Import the request body type for updating user information
 import BadRequestError from "../errors/BadRequestError"; // Import BadRequestError for handling invalid request data
 import type { IUpdateUserResponse } from "../types/responses/IUpdateUserResponse"; // Import the response type for updating user information
 import { IGetUsersResponse } from "../types/responses/IGetUsersResponse"; // Import the response type for getting multiple users
@@ -89,7 +89,7 @@ export async function deleteUser(
  * @returns A response containing the updated user information or an error.
  */
 export async function updateUser(
-	req: Request<object, object, IUpdateUserBody>,
+	req: Request<object, object, IUpdateUserDTO>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response<IUpdateUserResponse> | void> {
@@ -240,7 +240,7 @@ export async function getTargetUserDelete(
  * @returns A response containing the updated target user information or an error.
  */
 export async function getTargetUserUpdate(
-	req: Request<IIdentifiable, object, IUpdateUserBody>,
+	req: Request<IIdentifiable, object, IUpdateUserDTO>,
 	res: Response,
 	next: NextFunction,
 ): Promise<Response<IUpdateUserResponse> | void> {

@@ -5,7 +5,7 @@ import type {
 	IUserDocument,
 } from "../types/documents/IUserDocument";
 import logger from "../utils/logger";
-import { IUpdateUserBody } from "../types/bodies/IUpdateUserBody";
+import { IUpdateUserBody } from "../types/dtos/IUpdateUserBody";
 import { hashPassword } from "../utils/password";
 import { IUpdateUserResponse } from "../types/responses/IUpdateUserResponse";
 

@@ -4,7 +4,7 @@
  * This interface defines the expected structure of the data
  * sent during user registration, where all fields are required.
  */
-export interface IRegisterBody {
+export interface IRegisterDTO {
 	email: string; // Required email address of the user
 	password: string; // Required password for the user account
 	name: string; // Required name of the user

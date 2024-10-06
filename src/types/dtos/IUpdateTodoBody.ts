@@ -1,7 +1,7 @@
 /**
  * Interface representing the body of an update request for a Todo item.
  */
-export interface IUpdateTodoBody {
+export interface IUpdateTodoDTO {
 	/**
 	 * The title of the Todo item. Optional field for updating the title.
 	 */

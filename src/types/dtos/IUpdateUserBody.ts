@@ -3,7 +3,7 @@
  *
  * All fields are optional, allowing for partial updates.
  */
-export interface IUpdateUserBody {
+export interface IUpdateUserDTO {
 	/**
 	 * The name of the user.
 	 * This field is optional and can be used to update the user's name.
