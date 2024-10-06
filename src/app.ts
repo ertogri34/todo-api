@@ -28,7 +28,7 @@ app.use(
 /**
  * Set to trust the proxy to get the real IP address
  */
-app.set("trust proxy", true);
+app.set("trust proxy", false);
 
 /**
  * Security for HTTP headers

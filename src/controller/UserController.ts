@@ -5,7 +5,7 @@ import type {
 	IUserDocument,
 } from "../types/documents/IUserDocument";
 import logger from "../utils/logger";
-import { IUpdateUserBody } from "../types/dtos/IUpdateUserBody";
+import type { IUpdateUserDTO } from "../types/dtos/IUpdateUserBody";
 import { hashPassword } from "../utils/password";
 import { IUpdateUserResponse } from "../types/responses/IUpdateUserResponse";
 
@@ -122,7 +122,7 @@ class UserController {
 	 */
 	public async updateByUserId(
 		userId: mongoose.Types.ObjectId,
-		body: IUpdateUserBody,
+		body: IUpdateUserDTO,
 	): Promise<IUpdateUserResponse> {
 		// If a password is provided, hash it before saving
 		if (body.password) {
