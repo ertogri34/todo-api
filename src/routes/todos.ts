@@ -5,7 +5,7 @@ import type {
 } from "express"; // Import necessary types from Express
 import TodoController from "../controller/TodoController"; // Import the Todo controller for handling business logic
 
-import { type ICreateTodoDTO } from "../types/dtos/ICreateTodoBody"; // Import the type for the request body of creating a Todo
+import { type ICreateTodoDTO } from "../types/dtos/ICreateTodoDTO"; // Import the type for the request body of creating a Todo
 import BadRequestError from "../errors/BadRequestError"; // Import custom error for bad requests
 import ServerFailedError from "../errors/ServerFailedError"; // Import custom error for server failures
 import { IIdentifiable } from "../types/params/IIdentifiable"; // Import the type for parameters when getting a Todo
